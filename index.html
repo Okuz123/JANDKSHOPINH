@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kashmir Shop Template</title>
+  <style>
+    :root{--accent:#7b3f00;--muted:#666}
+    body{font-family:Arial,sans-serif;margin:0;background:#f7f7f7;color:#111}
+    header{background:#fff;padding:18px;border-bottom:1px solid #eee}
+    .container{max-width:1100px;margin:auto;padding:0 16px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:58px;height:58px;border-radius:8px;background:linear-gradient(135deg,#ffd899,#bb6b1a);display:grid;place-items:center;color:#fff;font-weight:700}
+    h1{font-size:20px;margin:0}
+    p.subtitle{margin:4px 0 0;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-top:20px}
+    .card{background:#fff;border-radius:12px;padding:12px;border:1px solid #eee}
+    .card img{width:100%;height:150px;object-fit:cover;border-radius:8px}
+    .price{font-weight:700;color:var(--accent)}
+    .muted{color:var(--muted);font-size:13px}
+    .btn{display:inline-block;padding:8px 12px;border-radius:8px;border:none;background:var(--accent);color:#fff;text-decoration:none}
+    .footer{padding:18px;text-align:center;color:var(--muted);font-size:14px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <div class="logo">KG</div>
+        <div>
+          <h1 id="shop-name">Kashmir Gold Store</h1>
+          <p class="subtitle" id="shop-tag">Dry fruits, saffron & local handicrafts</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="grid" id="products-grid"></section>
+  </main>
+
+  <div class="footer">Made for Kashmiri shopkeepers • Host on GitHub Pages</div>
+
+  <script>
+    const SHOP_INFO = {
+      name: "Kashmir Gold Store",
+      tag: "Pure saffron, dry-fruits & crafts",
+      ownerWhatsapp: "+919999000000", // Replace with your number in international format
+      currency: "₹"
+    };
+
+    const PRODUCTS = [
+      {id:1, title:"Premium Saffron (1 gm)", price:1200, img:"https://images.unsplash.com/photo-1582515073490-3998134c5d0a?auto=format&fit=crop&w=800&q=60", desc:"Pure Kashmiri saffron — hand-picked."},
+      {id:2, title:"Kashmiri Walnuts (500g)", price:450, img:"https://images.unsplash.com/photo-1510627498534-cf7e9002facc?auto=format&fit=crop&w=800&q=60", desc:"Fresh local walnuts."},
+      {id:3, title:"Pashmina Shawl", price:3500, img:"https://images.unsplash.com/photo-1558640479-88c5a9f0f1b5?auto=format&fit=crop&w=800&q=60", desc:"Soft pashmina shawl."}
+    ];
+
+    document.getElementById('shop-name').innerText = SHOP_INFO.name;
+    document.getElementById('shop-tag').innerText = SHOP_INFO.tag;
+
+    const grid = document.getElementById('products-grid');
+    PRODUCTS.forEach(p=>{
+      const c = document.createElement('div'); c.className='card';
+      c.innerHTML = `
+        <img src="${p.img}" alt="${p.title}" />
+        <h3>${p.title}</h3>
+        <div class="muted">${p.desc}</div>
+        <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center">
+          <div class="price">${SHOP_INFO.currency}${p.price}</div>
+          <a class="btn" href="https://wa.me/${SHOP_INFO.ownerWhatsapp}?text=I%20want%20to%20buy%20${encodeURIComponent(p.title)}">Buy</a>
+        </div>
+      `;
+      grid.appendChild(c);
+    });
+  </script>
+</body>
+  </html>
